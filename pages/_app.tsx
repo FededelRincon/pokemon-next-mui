@@ -11,8 +11,8 @@ import '../styles/globals.css'
 
 export default function App({ Component, pageProps }: AppProps) {
 
-  const [activeTheme, setActiveTheme] = useState( lightTheme )
-  const [selectedTheme, setSelectedTheme] = useState<'light' | 'dark'> ('light')
+  const [activeTheme, setActiveTheme] = useState( darkTheme )
+  const [selectedTheme, setSelectedTheme] = useState<'light' | 'dark'> ('dark')
 
   const toggleTheme = () => {
     setSelectedTheme( selectedTheme === 'light' ? 'dark' : 'light' );
