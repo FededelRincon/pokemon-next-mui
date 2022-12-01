@@ -1,9 +1,12 @@
+import React from 'react'
 import { NextPage } from 'next'
 
 import { Box, FormControlLabel, Switch, Typography } from '@mui/material'
 
+import { Layout } from '../components/layouts'
+
 import styles from '../styles/Home.module.css'
-import React from 'react'
+
 
 
 interface Props {
@@ -14,7 +17,11 @@ interface Props {
 const HomePage: NextPage<Props> = ({ toggleTheme }) => {
   return (
     <>
-      <div className={styles.container}>
+      {/* <div className={styles.container}> */}
+      <div>
+        <Layout title='Pokemons App' toggleTheme={toggleTheme} >
+
+        </Layout>
         {/* <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
 
         <main className={styles.main}>
@@ -22,10 +29,6 @@ const HomePage: NextPage<Props> = ({ toggleTheme }) => {
         </main> */}
 
         <h1>algo</h1>
-
-        <h2>switch cambiar modos</h2>
-        <FormControlLabel control={<Switch defaultChecked onClick={toggleTheme as any}/>} label="dia/noche" />
-
 
         <Box sx={{ width: '100%', maxWidth: 500 }}>
         <Typography variant="h1" gutterBottom>
