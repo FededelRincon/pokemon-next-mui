@@ -1,7 +1,10 @@
 import { FC } from "react";
 import Head from "next/head";
 
+import { Box } from "@mui/system";
+
 import { Navbar } from '../ui';
+
 
 
 interface Props {
@@ -9,7 +12,6 @@ interface Props {
     title?: string;
     toggleTheme: React.MouseEventHandler<HTMLAnchorElement>
 }
-
 
 
 const origin = (typeof window === 'undefined') ? '' : window.location.origin;   
@@ -36,7 +38,9 @@ export const Layout: FC<Props> = ({ children, title, toggleTheme }) => {
             <Navbar toggleTheme={ toggleTheme } />
 
             <main>
-                { children }
+                <Box sx={{margin: '0px 20px'}}>
+                    { children }
+                </Box>
             </main>
         </>
     )
