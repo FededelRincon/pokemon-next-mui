@@ -1,13 +1,12 @@
 import React from 'react'
 import { GetStaticProps, NextPage } from 'next';
 
-import { Box, FormControlLabel, Switch, Typography } from '@mui/material'
-
 import { Layout } from '../components/layouts'
+import { PokemonList } from '../components/pokemon';
 
 import { pokeApi } from '../api';
 
-import styles from '../styles/Home.module.css'
+// import styles from '../styles/Home.module.css'
 
 import { PokemonListResponse, SmallPokemon } from '../interfaces';
 
@@ -20,7 +19,7 @@ interface Props {
 
 const HomePage: NextPage<Props> = ({ toggleTheme, pokemons }) => {
 
-  console.log(pokemons)
+  // console.log(pokemons)
 
   return (
     <>
@@ -28,22 +27,13 @@ const HomePage: NextPage<Props> = ({ toggleTheme, pokemons }) => {
       <div>
         <Layout title='Pokemons App' toggleTheme={toggleTheme} >
 
-          <ul>
-            {
-              pokemons.map( (pokemon) => (
-                <li key={pokemon.id} > 
-                  {pokemon.id} - {pokemon.name} 
-                </li>
-              ))
-            }
-          </ul>
+          <PokemonList pokemons={pokemons} />
 
         </Layout>
         {/* <main className={styles.main}>
           <h1 className={styles.title}> algo </h1>
         </main> */}
       </div>
-    
     </>
   )
 }
