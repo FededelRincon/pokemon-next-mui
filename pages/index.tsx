@@ -1,10 +1,8 @@
 import React from 'react'
 import { GetStaticProps, NextPage } from 'next';
 
-import { Grid } from '@mui/material'
-
 import { Layout } from '../components/layouts'
-import { PokemonCard } from '../components/pokemon';
+import { PokemonList } from '../components/pokemon';
 
 import { pokeApi } from '../api';
 
@@ -29,26 +27,13 @@ const HomePage: NextPage<Props> = ({ toggleTheme, pokemons }) => {
       <div>
         <Layout title='Pokemons App' toggleTheme={toggleTheme} >
 
-          <Grid 
-            container 
-            spacing={2} 
-            columns={{ xs: 4, sm: 8, md: 12 }}
-            style={{textAlign: "center"}}
-            sx={{marginTop: 3}}
-          >
-            {
-              pokemons.map( (pokemon) => (
-                <PokemonCard key={pokemon.id} pokemon={pokemon} />
-              ))
-            }
-          </Grid>
+          <PokemonList pokemons={pokemons} />
 
         </Layout>
         {/* <main className={styles.main}>
           <h1 className={styles.title}> algo </h1>
         </main> */}
       </div>
-    
     </>
   )
 }
