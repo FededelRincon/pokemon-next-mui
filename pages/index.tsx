@@ -1,16 +1,16 @@
 import React from 'react'
 import { GetStaticProps, NextPage } from 'next';
 
-import { Card, CardActionArea, CardContent, CardMedia, Grid, Typography } from '@mui/material'
+import { Grid } from '@mui/material'
 
 import { Layout } from '../components/layouts'
+import { PokemonCard } from '../components/pokemon';
 
 import { pokeApi } from '../api';
 
-import styles from '../styles/Home.module.css'
+// import styles from '../styles/Home.module.css'
 
 import { PokemonListResponse, SmallPokemon } from '../interfaces';
-import Image from 'next/image';
 
 
 
@@ -21,7 +21,7 @@ interface Props {
 
 const HomePage: NextPage<Props> = ({ toggleTheme, pokemons }) => {
 
-  console.log(pokemons)
+  // console.log(pokemons)
 
   return (
     <>
@@ -38,31 +38,7 @@ const HomePage: NextPage<Props> = ({ toggleTheme, pokemons }) => {
           >
             {
               pokemons.map( (pokemon) => (
-                <Grid 
-                  item
-                  key={pokemon.id} 
-                  xs={4} 
-                >
-                  <Card 
-                  >
-                    <CardActionArea>
-                      <Image 
-                        src={pokemon.img}
-                        alt={pokemon.name}
-                        width={150}
-                        height={150}
-                        style={{ marginTop: '10px' }}
-                      />
-
-                      <CardContent sx={{display: 'flex', justifyContent: 'space-between'}}>
-                        <Typography style={{ textTransform: 'capitalize' }} variant="h5" component="div"> {pokemon.name} </Typography>
-
-                        <Typography variant="h5" component="div"> #{pokemon.id} </Typography>
-
-                      </CardContent>
-                    </CardActionArea>
-                  </Card>
-                </Grid>
+                <PokemonCard key={pokemon.id} pokemon={pokemon} />
               ))
             }
           </Grid>
