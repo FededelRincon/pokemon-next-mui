@@ -1,7 +1,7 @@
 import React from 'react'
 import { GetStaticProps, NextPage } from 'next';
 
-import { Box, FormControlLabel, Switch, Typography } from '@mui/material'
+import { Card, CardActionArea, CardContent, CardMedia, Grid, Typography } from '@mui/material'
 
 import { Layout } from '../components/layouts'
 
@@ -10,6 +10,7 @@ import { pokeApi } from '../api';
 import styles from '../styles/Home.module.css'
 
 import { PokemonListResponse, SmallPokemon } from '../interfaces';
+import Image from 'next/image';
 
 
 
@@ -28,15 +29,43 @@ const HomePage: NextPage<Props> = ({ toggleTheme, pokemons }) => {
       <div>
         <Layout title='Pokemons App' toggleTheme={toggleTheme} >
 
-          <ul>
+          <Grid 
+            container 
+            spacing={2} 
+            columns={{ xs: 4, sm: 8, md: 12 }}
+            style={{textAlign: "center"}}
+            sx={{marginTop: 3}}
+          >
             {
               pokemons.map( (pokemon) => (
-                <li key={pokemon.id} > 
-                  {pokemon.id} - {pokemon.name} 
-                </li>
+                <Grid 
+                  item
+                  key={pokemon.id} 
+                  xs={4} 
+                >
+                  <Card 
+                  >
+                    <CardActionArea>
+                      <Image 
+                        src={pokemon.img}
+                        alt={pokemon.name}
+                        width={150}
+                        height={150}
+                        style={{ marginTop: '10px' }}
+                      />
+
+                      <CardContent sx={{display: 'flex', justifyContent: 'space-between'}}>
+                        <Typography style={{ textTransform: 'capitalize' }} variant="h5" component="div"> {pokemon.name} </Typography>
+
+                        <Typography variant="h5" component="div"> #{pokemon.id} </Typography>
+
+                      </CardContent>
+                    </CardActionArea>
+                  </Card>
+                </Grid>
               ))
             }
-          </ul>
+          </Grid>
 
         </Layout>
         {/* <main className={styles.main}>
