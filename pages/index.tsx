@@ -19,8 +19,6 @@ interface Props {
 
 const HomePage: NextPage<Props> = ({ toggleTheme, pokemons }) => {
 
-  // console.log(pokemons)
-
   return (
     <>
       {/* <div className={styles.container}> */}

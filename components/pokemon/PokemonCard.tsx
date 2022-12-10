@@ -1,5 +1,6 @@
 import { FC } from "react"
 import Image from "next/image"
+import { useRouter } from 'next/router';
 
 import { Card, CardActionArea, CardContent, Grid, Typography } from "@mui/material"
 
@@ -12,6 +13,12 @@ interface Props {
 
 export const PokemonCard: FC<Props> = ({ pokemon }) => {
 
+    const router = useRouter();
+
+    const onClick = () => {
+        router.push(`/name/${ pokemon.name }`)
+    }
+
   return (
     <Grid 
         item
@@ -19,6 +26,7 @@ export const PokemonCard: FC<Props> = ({ pokemon }) => {
         xs={4} 
     >
         <Card 
+            onClick={ onClick }
         >
         <CardActionArea>
             <Image 
