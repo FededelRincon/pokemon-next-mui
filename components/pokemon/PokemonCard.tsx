@@ -28,23 +28,23 @@ export const PokemonCard: FC<Props> = ({ pokemon }) => {
         <Card 
             onClick={ onClick }
         >
-        <CardActionArea>
-            <Image 
-                src={pokemon.img}
-                alt={pokemon.name}
-                width={150}
-                height={150}
-                priority
-                style={{ marginTop: '10px' }}
-            />
+            <CardActionArea>
+                <Image 
+                    src={pokemon.img}
+                    alt={pokemon.name}
+                    width={150}
+                    height={150}
+                    priority
+                    style={{ marginTop: '10px' }}
+                />
 
-            <CardContent sx={{display: 'flex', justifyContent: 'space-between'}}>
-            <Typography style={{ textTransform: 'capitalize' }} variant="h5" component="div"> {pokemon.name} </Typography>
+                <CardContent sx={{display: 'flex', justifyContent: 'space-between'}}>
+                    <Typography style={{ textTransform: 'capitalize' }} variant="h5" component="div"> {pokemon.name} </Typography>
 
-            <Typography variant="h5" component="div"> #{pokemon.id} </Typography>
+                    <Typography variant="h5" component="div"> #{pokemon.id} </Typography>
 
-            </CardContent>
-        </CardActionArea>
+                </CardContent>
+            </CardActionArea>
         </Card>
     </Grid>
   )

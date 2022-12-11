@@ -1,4 +1,7 @@
+import { Grid, Typography } from '@mui/material';
+import { Box } from '@mui/system';
 import { GetStaticProps, GetStaticPaths, NextPage } from 'next';
+import Image from 'next/image';
 
 import { useState } from 'react';
 import { pokeApi } from '../../api';
@@ -12,14 +15,17 @@ import { getPokemonInfo, localFavorites } from '../../utils';
 
 interface Props {
     pokemon: Pokemon;
+    toggleTheme: React.MouseEventHandler<HTMLAnchorElement>
 }
 
 
-export const PokemonByNamePage: NextPage<Props> = ({ pokemon }) => {
+export const PokemonByNamePage: NextPage<Props> = ({ toggleTheme, pokemon }) => {
 
+    const { height, id, name, sprites, types, weight } = pokemon
 
+    console.log(pokemon)
 
-    const [isInFavorites, setIsInFavorites] = useState( localFavorites.existInFavorites(pokemon.id) );
+    // const [isInFavorites, setIsInFavorites] = useState( localFavorites.existInFavorites(pokemon.id) );
 
     // const onToggleFavorite = () => {
     //     localFavorites.toggleFavorite( pokemon.id );
@@ -42,7 +48,39 @@ export const PokemonByNamePage: NextPage<Props> = ({ pokemon }) => {
 
     return (
         <>
-            <h1>{pokemon.name}</h1>
+            <Layout title='Pokemons App' toggleTheme={toggleTheme} >
+                <Grid container spacing={2}>
+                    <Grid item xs={4}>
+                        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 10 }} >
+                            <Image 
+                                src={ sprites.other?.dream_world.front_default || '/no-image.png' }
+                                alt={ name }
+                                width='175'
+                                height='202'
+                                priority
+                                style={{ marginTop: '10px' }}
+                            />
+                        </Box>
+                    </Grid>
+                    <Grid item xs={2}>
+                        <Box sx={{ padding: 10 }} >
+                            <Typography style={{ textTransform: 'capitalize' }} variant="h4" gutterBottom>nombre:{name}</Typography>
+                            <Typography variant="h4" gutterBottom>altura:{height}</Typography>
+                            <Typography variant="h4" gutterBottom>numero:{id}</Typography>
+                            <Typography variant="h4" gutterBottom>peso:{weight}</Typography>
+                            <Typography variant="h4">Types:</Typography>
+                            {
+                                types.map( (type) => (
+                                    <Typography variant="h4">{type.type.name}</Typography>
+                                    ))
+                                }
+                        </Box>
+
+                    </Grid>
+                </Grid>
+            </Layout>
+
+
         </>
         // <Layout title={ pokemon.name }>
         //     <Grid.Container css={{ marignTop: '5px'}} gap={2} >
@@ -172,8 +210,6 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
     const pokemon = await getPokemonInfo( name )
     // const pokemon = await getPokemonInfo( name.toLocaleLowerCase() )
 
-    // console.log('getStaticProps')
-    // console.log(pokemon)
     if ( !pokemon ) {
         return {
             redirect: {
