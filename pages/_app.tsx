@@ -4,9 +4,11 @@ import type { AppProps } from 'next/app'
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
+
 import { darkTheme, lightTheme } from '../themes';
 
 import '../styles/globals.css'
+import { SearchProvider } from '../context/search';
 
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -24,10 +26,12 @@ export default function App({ Component, pageProps }: AppProps) {
   
 
   return (
-    <ThemeProvider theme={ activeTheme }  >
-      <CssBaseline />
-      <Component {...pageProps} toggleTheme={toggleTheme} />
-    </ThemeProvider>
+    <SearchProvider>
+      <ThemeProvider theme={ activeTheme }  >
+        <CssBaseline />
+        <Component {...pageProps} toggleTheme={toggleTheme} />
+      </ThemeProvider>
+    </SearchProvider>
 
   )
 }

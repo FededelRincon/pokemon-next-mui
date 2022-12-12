@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { FC } from "react";
+import { FC, useContext, useState } from "react";
 import Image from 'next/image';
 
 import { styled, alpha } from '@mui/material/styles';
@@ -10,6 +9,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
+import { SearchContext } from '../../context/search';
 import { SwitchSelector } from './index';
 
 
@@ -62,7 +62,22 @@ interface Props {
 
 export const Navbar: FC<Props> = ({ toggleTheme }) => {
 
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
+  const { toggleSearchActive, updateTextSearch } = useContext(SearchContext);
+
+
+  const onSearchTerm = ( e:any ) => {
+    const text = e.target.value;
+
+    if (text.length !== 0) {
+        toggleSearchActive(true)
+        updateTextSearch(text)
+    } else {
+        toggleSearchActive(false)
+        updateTextSearch('')
+    }
+  }
+
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState<null | HTMLElement>(null);
 
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -141,6 +156,7 @@ export const Navbar: FC<Props> = ({ toggleTheme }) => {
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
+              onChange={ (e) => onSearchTerm(e) }
             />
           </Search>
 

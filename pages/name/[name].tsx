@@ -23,7 +23,7 @@ export const PokemonByNamePage: NextPage<Props> = ({ toggleTheme, pokemon }) => 
 
     const { height, id, name, sprites, types, weight } = pokemon
 
-    console.log(pokemon)
+    // console.log(pokemon)
 
     // const [isInFavorites, setIsInFavorites] = useState( localFavorites.existInFavorites(pokemon.id) );
 
