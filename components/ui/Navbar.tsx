@@ -1,8 +1,9 @@
 import { FC, useContext, useState } from "react";
 import Image from 'next/image';
+import NextLink from 'next/link';
 
 import { styled, alpha } from '@mui/material/styles';
-import { AppBar, Badge, Box, FormControlLabel, InputBase, Menu, MenuItem, Switch, Toolbar, Typography } from '@mui/material';
+import { AppBar, Badge, Box, InputBase, Menu, MenuItem, Toolbar, Typography } from '@mui/material';
 
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
@@ -129,6 +130,15 @@ export const Navbar: FC<Props> = ({ toggleTheme }) => {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
+          <NextLink href="/" style={{textDecoration: 'none', marginTop: 4 }} >
+            <Image 
+                src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png"
+                alt="icono de la app"
+                width={50}
+                height={50}
+            />
+          </NextLink>
+
 
           <IconButton
             size="medium"
@@ -136,17 +146,17 @@ export const Navbar: FC<Props> = ({ toggleTheme }) => {
             color="inherit"
             aria-label="open drawer"
             sx={{ mr: 1 }}
+            disableRipple
           >
-            <Box sx={{ display: { xs: 'none', sm: 'flex' }, marginRight: 2 }}>
-                <Image 
-                    src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png"
-                    alt="icono de la app"
-                    width={50}
-                    height={50}
-                />
-            </Box>
+            <NextLink href="/" style={{textDecoration: 'none'}} >
+              <Box sx={{ display: { xs: 'none', sm: 'flex' }, marginRight: 2 }}>
 
-            Poke App
+                <Typography variant="h4" sx={{ textDecoration: 'none', color: 'white', marginTop: 1, marginLeft: 1 }}>
+                  Poke App
+                </Typography>
+              </Box>
+            </NextLink>
+
           </IconButton>
 
           <Search>
@@ -154,7 +164,7 @@ export const Navbar: FC<Props> = ({ toggleTheme }) => {
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
-              placeholder="Search…"
+              placeholder="Search Pokemon…"
               inputProps={{ 'aria-label': 'search' }}
               onChange={ (e) => onSearchTerm(e) }
             />

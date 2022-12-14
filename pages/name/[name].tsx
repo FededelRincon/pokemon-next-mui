@@ -71,7 +71,7 @@ export const PokemonByNamePage: NextPage<Props> = ({ toggleTheme, pokemon }) => 
                             <Typography variant="h4">Types:</Typography>
                             {
                                 types.map( (type) => (
-                                    <Typography variant="h4">{type.type.name}</Typography>
+                                    <Typography key={type.type.name} variant="h4">{type.type.name}</Typography>
                                     ))
                                 }
                         </Box>
