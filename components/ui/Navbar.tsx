@@ -1,6 +1,7 @@
 import { FC, useContext, useState } from "react";
 import Image from 'next/image';
 import NextLink from 'next/link';
+import { useRouter } from "next/router";
 
 import { styled, alpha } from '@mui/material/styles';
 import { AppBar, Badge, Box, InputBase, Menu, MenuItem, Toolbar, Typography } from '@mui/material';
@@ -78,6 +79,12 @@ export const Navbar: FC<Props> = ({ toggleTheme }) => {
     }
   }
 
+  const router = useRouter();
+
+  const onFavorite = () => {
+    router.push(`/favorites`)
+}
+
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState<null | HTMLElement>(null);
 
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -109,10 +116,10 @@ export const Navbar: FC<Props> = ({ toggleTheme }) => {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
+      <MenuItem onClick={ onFavorite }>
         <IconButton size="large" color="inherit">
           <Badge >
-            <FavoriteIcon />
+            <FavoriteIcon/>
           </Badge>
         </IconButton>
         <p>Favorites</p>
@@ -175,7 +182,7 @@ export const Navbar: FC<Props> = ({ toggleTheme }) => {
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <IconButton size="large" color="inherit">
               <Badge>
-                <FavoriteIcon />
+                <FavoriteIcon onClick={ onFavorite } />
               </Badge>
             </IconButton>
 
