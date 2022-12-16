@@ -49,14 +49,14 @@ export const PokemonByNamePage: NextPage<Props> = ({ toggleTheme, pokemon }) => 
     return (
         <>
             <Layout title='Pokemons App' toggleTheme={toggleTheme} >
-                    <Button 
-                        variant="contained"
-                        onClick={ onToggleFavorite }
-                    >
-                        {
-                            isInFavorites ? 'Delete from favorites' : 'Save in favorites'
-                        }
-                    </Button>
+                <Button 
+                    variant="contained"
+                    onClick={ onToggleFavorite }
+                >
+                    {
+                        isInFavorites ? 'Delete from favorites' : 'Save in favorites'
+                    }
+                </Button>
                 <Grid container spacing={2}>
                     <Grid item xs={4}>
                         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 10 }} >
@@ -123,30 +123,23 @@ export const PokemonByNamePage: NextPage<Props> = ({ toggleTheme, pokemon }) => 
 // You should use getStaticPaths if you’re statically pre-rendering pages that use dynamic routes
 
 export const getStaticPaths: GetStaticPaths = async (ctx) => {
-    const { data } = await pokeApi.get<PokemonListResponse>('/pokemon?limit=151') 
-    // console.log(data)
-    // crea un array de 0 a 151, con todos los nombres(arreglo de nombres)
-    const pokemonNames: string[] = data.results.map( pokemon => pokemon.name );
-
+    const pokemons151 = [...Array(151)].map( ( value, index ) => `${ index + 1 }` );
+  
     return {
-        paths: pokemonNames.map( (name) => ({
-            params: { name }    
+        paths: pokemons151.map( id => ({
+            params: { id }
         })),
         // fallback: false
         fallback: 'blocking'
     }
-    //esta la generacion de forma dinamica de todos los posibles argumentos que el getStaticProps puede recibir
-    //son pikachu, bolbasaur, charmander, etc.... son 151
 }
 
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
 
-    const { name } = ctx.params as { name: string };
-
+    const { id } = ctx.params as { id: string };
     
-    const pokemon = await getPokemonInfo( name )
-    // const pokemon = await getPokemonInfo( name.toLocaleLowerCase() )
+    const pokemon = await getPokemonInfo( id );
 
     if ( !pokemon ) {
         return {
@@ -155,12 +148,13 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
                 permanent: false
             }
         }
-    }
-
+      }
+    
     return {
         props: {
-            pokemon
-        }
+           pokemon
+        },
+        revalidate: 86400, // 60 * 60 * 24,
     }
 }
 
