@@ -127,3 +127,68 @@
     filter: invert(1);
   }
 } */
+
+
+/* opciones de fondo... 41 combinaciones */
+/* grass / poison
+fire
+fire/flying
+water
+bug
+bug/flying
+bug/poison
+bug/grass
+normal/flying
+normal
+poison
+electric
+ground
+poison/ground
+fairy
+normal/fairy
+poison/flying
+fighting
+water/fighting
+psychic
+grass/poison
+water/poison
+rock/ground
+water/psychic
+electric/steel
+water/ice
+ghost/poison
+grass/psychic
+poison
+water/psychic
+psychic/fairy
+ice/psychic
+water/flying
+rock/water
+rock/flying
+ice/flying
+electric/flying
+dragon
+dragon/flying */
+
+
+
+
+
+/* por separado y unir con gradientes... 16 combinaciones */
+/* bug
+dragon
+electric
+fairy
+fighting
+fire
+flying
+ghost
+grass
+ground
+ice
+normal
+poison
+psychic
+rock
+steel
+water */
