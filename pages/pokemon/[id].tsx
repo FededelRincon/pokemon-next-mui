@@ -1,4 +1,4 @@
-import { Button, Grid, Typography } from '@mui/material';
+import { Button, CardContent, Divider, Grid, Paper, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { GetStaticProps, GetStaticPaths, NextPage } from 'next';
 import Image from 'next/image';
@@ -10,16 +10,19 @@ import { Layout } from '../../components/layouts';
 // import confetti from 'canvas-confetti';
 
 import { Pokemon, PokemonListResponse } from '../../interfaces';
-import { getPokemonInfo, localFavorites } from '../../utils';
+import { getPokemonInfo, localFavorites, typePokeToHex } from '../../utils';
+
+import styled from 'styled-components';
 
 
 interface Props {
     pokemon: Pokemon;
-    toggleTheme: React.MouseEventHandler<HTMLAnchorElement>
+    toggleTheme: React.MouseEventHandler<HTMLAnchorElement>;
+    colorTypePoke: string;
 }
 
 
-export const PokemonByNamePage: NextPage<Props> = ({ toggleTheme, pokemon }) => {
+export const PokemonByNamePage: NextPage<Props> = ({ toggleTheme, pokemon, colorTypePoke }) => {
 
     const { height, id, name, sprites, types, weight } = pokemon
 
@@ -45,76 +48,125 @@ export const PokemonByNamePage: NextPage<Props> = ({ toggleTheme, pokemon }) => 
 
     }
 
+    const GradientDiv = styled.div`
+        background: linear-gradient(to bottom right, #ddd 10%, ${props => props.color} 35%, #000 85%);;
+    `;
 
     return (
         <>
-            <Layout title='Pokemons App' toggleTheme={toggleTheme} >
-                <Button 
-                    variant="contained"
-                    onClick={ onToggleFavorite }
-                >
-                    {
-                        isInFavorites ? 'Delete from favorites' : 'Save in favorites'
-                    }
-                </Button>
-                <Grid container spacing={2}>
-                    <Grid item xs={4}>
-                        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 10 }} >
-                            <Image 
-                                src={ sprites.other?.dream_world.front_default || '/no-image.png' }
-                                alt={ name }
-                                width='175'
-                                height='202'
-                                priority
-                                style={{ marginTop: '10px' }}
-                            />
-                        </Box>
-                    </Grid>
-                    <Grid item xs={2}>
-                        <Box sx={{ padding: 10 }} >
-                            <Typography style={{ textTransform: 'capitalize' }} variant="h4" gutterBottom>nombre:{name}</Typography>
-                            <Typography variant="h4" gutterBottom>altura:{height}</Typography>
-                            <Typography variant="h4" gutterBottom>numero:{id}</Typography>
-                            <Typography variant="h4" gutterBottom>peso:{weight}</Typography>
-                            <Typography variant="h4">Types:</Typography>
+            <GradientDiv color={`${colorTypePoke}`}>
+
+                <Layout title='Pokemons App' toggleTheme={toggleTheme} >
+                        <Button 
+                            variant="contained"
+                            onClick={ onToggleFavorite }
+                            color={'primary'}
+                            sx={{marginTop: 2}}
+                        >
                             {
-                                types.map( (type) => (
-                                    <Typography key={type.type.name} variant="h4">{type.type.name}</Typography>
-                                    ))
-                                }
-                        </Box>
+                                isInFavorites ? 'Delete from favorites' : 'Save in favorites'
+                            }
+                        </Button>
+                    <Grid 
+                        container 
+                        spacing={2}
+                        alignItems= {"center"}
+                        justifyContent={'center'}
+                    >
+                        <Grid item 
+                            // xs={12} sm={4}
+                        >
+                            <Box sx={{ 
+                                display: 'flex', 
+                                alignItems: 'center', 
+                                justifyContent: 'center', 
+                                // paddingTop: 10, 
+                                // backgroundColor:'pink' 
+                            }} >
+                                <Image 
+                                    src={ sprites.other?.dream_world.front_default || '/no-image.png' }
+                                    alt={ name }
+                                    width='175'
+                                    height='202'
+                                    priority
+                                    style={{ marginTop: '10px' }}
+                                />
+                            </Box>
+                        </Grid>
 
+                        <Grid item sx={{padding: 10}}></Grid>
+                        
+                        <Grid item 
+                        >
+
+                            <Paper sx={{ minWidth: 300 }} elevation={10}>
+                                <CardContent>
+                                    <Typography sx={{ mb: 1.5, textTransform: 'capitalize' }} align='center' variant="h4" component="div">
+                                        {name}
+                                    </Typography>
+                                    <Typography sx={{ mb: 0.5, textTransform: 'capitalize' }} variant="h6" color="text.secondary">
+                                        height: {(height * 0.1).toFixed(1)} mts
+                                    </Typography>
+                                   <Typography sx={{ mb: 0.5, textTransform: 'capitalize' }} variant="h6" color="text.secondary">
+                                       weight: {(weight * 0.1).toFixed(1)} kg
+                                    </Typography>
+                                    <Typography sx={{ mb: 0.5, textTransform: 'capitalize' }} variant="h6" color="text.secondary">
+                                        Pokemon # {id}
+                                    </Typography>
+                                    <Typography sx={{ mb: 0.5, textTransform: 'capitalize' }} variant="h6" color="text.secondary">
+                                        Types: 
+                                    </Typography>
+                                    {
+                                    types.map( (type) => (
+                                        <Typography sx={{ ml: 3.5, textTransform: 'capitalize' }} style={{ display: 'list-item' }} variant="h6" color="text.secondary">{type.type.name}</Typography>
+                                        ))
+                                    }
+
+                                </CardContent>
+                            </Paper>
+                        </Grid>
                     </Grid>
-                </Grid>
 
-                <Box sx={{ display: 'flex' }} >
-                    <Typography variant="h4">Sprites:</Typography>
-                    <Image 
-                        src={pokemon.sprites.front_default}
-                        alt={pokemon.name}
-                        width={ 200 }
-                        height={ 200 }
-                    />
-                    <Image 
-                        src={pokemon.sprites.back_default}
-                        alt={pokemon.name}
-                        width={ 200 }
-                        height={ 200 }
-                    />
-                    <Image 
-                        src={pokemon.sprites.front_shiny}
-                        alt={pokemon.name}
-                        width={ 200 }
-                        height={ 200 }
-                    />
-                    <Image 
-                        src={pokemon.sprites.back_shiny}
-                        alt={pokemon.name}
-                        width={ 200 }
-                        height={ 200 }
-                    />
-                </Box>
-            </Layout>
+                    <Divider sx={{ paddingTop: 5}}>
+                        <Typography variant="h4"> Sprites </Typography>
+                    </Divider>
+
+                    <Box >
+                        <Grid container sx={{ display: 'flex', justifyContent:"center" }}>
+                            <Grid item>
+                                <Image 
+                                    src={pokemon.sprites.front_default}
+                                    alt={pokemon.name}
+                                    width={ 200 }
+                                    height={ 200 }
+                                />
+                            </Grid>
+                            <Grid item>
+                                <Image 
+                                    src={pokemon.sprites.back_default}
+                                    alt={pokemon.name}
+                                    width={ 200 }
+                                    height={ 200 }
+                                />
+                            </Grid>
+                                <Image 
+                                    src={pokemon.sprites.front_shiny}
+                                    alt={pokemon.name}
+                                    width={ 200 }
+                                    height={ 200 }
+                                />
+                            <Grid item>
+                                <Image 
+                                    src={pokemon.sprites.back_shiny}
+                                    alt={pokemon.name}
+                                    width={ 200 }
+                                    height={ 200 }
+                                />
+                            </Grid>
+                        </Grid>
+                    </Box>
+                </Layout>
+            </GradientDiv>
         </>
      )
 };
@@ -141,6 +193,11 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
     
     const pokemon = await getPokemonInfo( id );
 
+    // get info for background-color
+    let pokemonTipe1 = pokemon!.types[0].type.name
+    let colorTypePoke = await typePokeToHex(pokemonTipe1) 
+
+
     if ( !pokemon ) {
         return {
             redirect: {
@@ -152,7 +209,8 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
     
     return {
         props: {
-           pokemon
+           pokemon,
+           colorTypePoke
         },
         revalidate: 86400, // 60 * 60 * 24,
     }
