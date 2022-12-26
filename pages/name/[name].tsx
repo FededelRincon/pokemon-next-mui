@@ -22,12 +22,15 @@ interface Props {
     colorTypePoke: string;
 }
 
+const GradientDiv = styled.div`
+    background: linear-gradient(to bottom right, #ddd 10%, ${props => props.color} 35%, #000 85%);;
+`;
+
+
 
 export const PokemonByNamePage: NextPage<Props> = ({ toggleTheme, pokemon, colorTypePoke }) => {
 
     const { height, id, name, sprites, types, weight } = pokemon
-
-
 
 
     const [isInFavorites, setIsInFavorites] = useState( localFavorites.existInFavorites(pokemon.id) );
@@ -51,9 +54,7 @@ export const PokemonByNamePage: NextPage<Props> = ({ toggleTheme, pokemon, color
     }
 
 
-    const GradientDiv = styled.div`
-        background: linear-gradient(to bottom right, #ddd 10%, ${props => props.color} 35%, #000 85%);;
-    `;
+    
 
     return (
         <>
@@ -120,8 +121,8 @@ export const PokemonByNamePage: NextPage<Props> = ({ toggleTheme, pokemon, color
                                         Types: 
                                     </Typography>
                                     {
-                                    types.map( (type) => (
-                                        <Typography sx={{ ml: 3.5, textTransform: 'capitalize' }} style={{ display: 'list-item' }} variant="h6" color="text.secondary">{type.type.name}</Typography>
+                                        types.map( (type) => (
+                                            <Typography key={type.type.name} sx={{ ml: 3.5, textTransform: 'capitalize' }} style={{ display: 'list-item' }} variant="h6" color="text.secondary">{type.type.name}</Typography>
                                         ))
                                     }
 
