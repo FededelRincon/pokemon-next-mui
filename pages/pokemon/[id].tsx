@@ -1,4 +1,4 @@
-import { Button, CardContent, Divider, Grid, Paper, Typography } from '@mui/material';
+import { Button, CardContent, Divider, Grid, Paper, Typography, Card } from '@mui/material';
 import { Box } from '@mui/system';
 import { GetStaticProps, GetStaticPaths, NextPage } from 'next';
 import Image from 'next/image';
@@ -21,12 +21,13 @@ interface Props {
     colorTypePoke: string;
 }
 
+const GradientDiv = styled.div`
+    background: linear-gradient(to bottom right, #ddd 10%, ${props => props.color} 35%, #000 85%);;
+`;
 
 export const PokemonByNamePage: NextPage<Props> = ({ toggleTheme, pokemon, colorTypePoke }) => {
 
     const { height, id, name, sprites, types, weight } = pokemon
-
-    // console.log(pokemon)
 
     const [isInFavorites, setIsInFavorites] = useState( localFavorites.existInFavorites(pokemon.id) );
 
@@ -48,9 +49,7 @@ export const PokemonByNamePage: NextPage<Props> = ({ toggleTheme, pokemon, color
 
     }
 
-    const GradientDiv = styled.div`
-        background: linear-gradient(to bottom right, #ddd 10%, ${props => props.color} 35%, #000 85%);;
-    `;
+
 
     return (
         <>
@@ -80,8 +79,6 @@ export const PokemonByNamePage: NextPage<Props> = ({ toggleTheme, pokemon, color
                                 display: 'flex', 
                                 alignItems: 'center', 
                                 justifyContent: 'center', 
-                                // paddingTop: 10, 
-                                // backgroundColor:'pink' 
                             }} >
                                 <Image 
                                     src={ sprites.other?.dream_world.front_default || '/no-image.png' }
@@ -99,7 +96,11 @@ export const PokemonByNamePage: NextPage<Props> = ({ toggleTheme, pokemon, color
                         <Grid item 
                         >
 
-                            <Paper sx={{ minWidth: 300 }} elevation={10}>
+                            <Card 
+                                sx={{ minWidth: 300 }} 
+                                elevation={10}
+                                color={'primary'}
+                            >
                                 <CardContent>
                                     <Typography sx={{ mb: 1.5, textTransform: 'capitalize' }} align='center' variant="h4" component="div">
                                         {name}
@@ -123,7 +124,7 @@ export const PokemonByNamePage: NextPage<Props> = ({ toggleTheme, pokemon, color
                                     }
 
                                 </CardContent>
-                            </Paper>
+                            </Card>
                         </Grid>
                     </Grid>
 

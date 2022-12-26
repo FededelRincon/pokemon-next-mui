@@ -31,10 +31,7 @@ const GradientDiv = styled.div`
 
 export const PokemonByNamePage: NextPage<Props> = ({ toggleTheme, pokemon, colorTypePoke }) => {
 
-    const theme = useTheme();
-
     const { height, id, name, sprites, types, weight } = pokemon
-
 
     const [isInFavorites, setIsInFavorites] = useState( localFavorites.existInFavorites(pokemon.id) );
 
