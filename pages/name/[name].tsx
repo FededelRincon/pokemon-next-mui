@@ -1,4 +1,4 @@
-import { Button, Card, CardContent, Divider, Grid, Paper, Typography } from '@mui/material';
+import { Button, Card, CardContent, Divider, Grid, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { GetStaticProps, GetStaticPaths, NextPage } from 'next';
 import Image from 'next/image';
@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { pokeApi } from '../../api';
 import { Layout } from '../../components/layouts';
+import { useTheme } from '@mui/material/styles';
 
 // import confetti from 'canvas-confetti';
 
@@ -29,6 +30,8 @@ const GradientDiv = styled.div`
 
 
 export const PokemonByNamePage: NextPage<Props> = ({ toggleTheme, pokemon, colorTypePoke }) => {
+
+    const theme = useTheme();
 
     const { height, id, name, sprites, types, weight } = pokemon
 
@@ -77,15 +80,11 @@ export const PokemonByNamePage: NextPage<Props> = ({ toggleTheme, pokemon, color
                         alignItems= {"center"}
                         justifyContent={'center'}
                     >
-                        <Grid item 
-                            // xs={12} sm={4}
-                        >
+                        <Grid item >
                             <Box sx={{ 
                                 display: 'flex', 
                                 alignItems: 'center', 
                                 justifyContent: 'center', 
-                                // paddingTop: 10, 
-                                // backgroundColor:'pink' 
                             }} >
                                 <Image 
                                     src={ sprites.other?.dream_world.front_default || '/no-image.png' }
@@ -103,7 +102,11 @@ export const PokemonByNamePage: NextPage<Props> = ({ toggleTheme, pokemon, color
                         <Grid item 
                         >
 
-                            <Paper sx={{ minWidth: 300 }} elevation={10}>
+                            <Card 
+                                sx={{ minWidth: 300 }} 
+                                elevation={10}
+                                color={'primary'}
+                            >
                                 <CardContent>
                                     <Typography sx={{ mb: 1.5, textTransform: 'capitalize' }} align='center' variant="h4" component="div">
                                         {name}
@@ -127,7 +130,7 @@ export const PokemonByNamePage: NextPage<Props> = ({ toggleTheme, pokemon, color
                                     }
 
                                 </CardContent>
-                            </Paper>
+                            </Card>
                         </Grid>
                     </Grid>
 
@@ -183,7 +186,6 @@ export const PokemonByNamePage: NextPage<Props> = ({ toggleTheme, pokemon, color
 
 export const getStaticPaths: GetStaticPaths = async (ctx) => {
     const { data } = await pokeApi.get<PokemonListResponse>('/pokemon?limit=151') 
-    // console.log(data)
     // crea un array de 0 a 151, con todos los nombres(arreglo de nombres)
     const pokemonNames: string[] = data.results.map( pokemon => pokemon.name );
 
