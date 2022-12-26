@@ -18,7 +18,7 @@ export const PokemonList: FC<Props> = ({ pokemons }) => {
         spacing={2} 
         columns={{ xs: 4, sm: 8, md: 12 }}
         style={{textAlign: "center"}}
-        sx={{marginTop: 3}}
+        sx={{marginTop: 1, backgroundColor: 'secondary.main'}}
     >
         {
             pokemons.map( (pokemon) => (

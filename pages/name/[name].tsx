@@ -100,9 +100,8 @@ export const PokemonByNamePage: NextPage<Props> = ({ toggleTheme, pokemon, color
                         >
 
                             <Card 
-                                sx={{ minWidth: 300 }} 
+                                sx={{ minWidth: 300, backgroundColor: 'secondary.main' }} 
                                 elevation={10}
-                                color={'primary'}
                             >
                                 <CardContent>
                                     <Typography sx={{ mb: 1.5, textTransform: 'capitalize' }} align='center' variant="h4" component="div">

@@ -27,6 +27,7 @@ export const PokemonCard: FC<Props> = ({ pokemon }) => {
     >
         <Card 
             onClick={ onClick }
+            sx={{ backgroundColor: 'primary.main'}}
         >
             <CardActionArea>
                 <Image 
