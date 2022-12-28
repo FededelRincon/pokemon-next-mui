@@ -1,7 +1,6 @@
 import { FC } from "react";
-// import { Card, Grid } from "@nextui-org/react";
 import { useRouter } from 'next/router';
-import { Card, CardActionArea, CardContent, Grid, Typography } from "@mui/material";
+import { Box, Card, CardActionArea, CardContent, Grid, Typography } from "@mui/material";
 import Image from "next/image";
 
 
@@ -26,16 +25,19 @@ export const FavoriteCardPokemon: FC<Props> = ({ pokemonId }) => {
         >
             <Card 
                 onClick={ onFavoriteClicked }
+                sx={{ backgroundColor: 'primary.main'}}
             >
                 <CardActionArea>
-                    <Image 
-                        src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${ pokemonId }.svg`}
-                        alt={`Pokemon number ${pokemonId}` }
-                        width={150}
-                        height={150}
-                        priority
-                        style={{ marginTop: '10px' }}
-                    />
+                    <Box sx={{marginTop: 2, marginBottom: 4 }} >
+                        <Image 
+                            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${ pokemonId }.svg`}
+                            alt={`Pokemon number ${pokemonId}` }
+                            width={150}
+                            height={150}
+                            priority
+                            style={{ marginTop: '10px' }}
+                        />
+                    </Box>
                 </CardActionArea>
             </Card>
         </Grid>

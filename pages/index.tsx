@@ -10,6 +10,7 @@ import { pokeApi } from '../api';
 import { SearchContext } from '../context/search';
 
 import { PokemonListResponse, SmallPokemon } from '../interfaces';
+import { Box } from '@mui/material';
 
 
 
@@ -33,17 +34,15 @@ const HomePage: NextPage<Props> = ({ toggleTheme, pokemons }) => {
 
   return (
     <>
-      {/* <div className={styles.container}> */}
-      <div>
+      <Box sx={{ backgroundColor: 'secondary.main'}} >
+        
         <Layout title='Pokemons App' toggleTheme={toggleTheme} >
 
           <PokemonList pokemons={ filtrado } />
 
         </Layout>
-        {/* <main className={styles.main}>
-          <h1 className={styles.title}> algo </h1>
-        </main> */}
-      </div>
+
+      </Box>
     </>
   )
 }
