@@ -2,8 +2,6 @@
 
 
 export const typePokeToHex = async ( type: string ) => {
-    console.log('entre a typePokeToHex')
-
         switch (type) {
             case 'bug':         return '#68B984';
             case 'dragon':      return '#F49D1A';

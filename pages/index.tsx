@@ -34,7 +34,6 @@ const HomePage: NextPage<Props> = ({ toggleTheme, pokemons }) => {
 
   return (
     <>
-      {/* <div className={styles.container}> */}
       <Box sx={{ backgroundColor: 'secondary.main'}} >
         
         <Layout title='Pokemons App' toggleTheme={toggleTheme} >
@@ -42,9 +41,7 @@ const HomePage: NextPage<Props> = ({ toggleTheme, pokemons }) => {
           <PokemonList pokemons={ filtrado } />
 
         </Layout>
-        {/* <main className={styles.main}>
-          <h1 className={styles.title}> algo </h1>
-        </main> */}
+
       </Box>
     </>
   )

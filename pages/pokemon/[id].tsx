@@ -1,15 +1,14 @@
-import { Button, CardContent, Divider, Grid, Paper, Typography, Card } from '@mui/material';
+import { Button, CardContent, Divider, Grid, Typography, Card } from '@mui/material';
 import { Box } from '@mui/system';
 import { GetStaticProps, GetStaticPaths, NextPage } from 'next';
 import Image from 'next/image';
 
 import { useState } from 'react';
-import { pokeApi } from '../../api';
 import { Layout } from '../../components/layouts';
 
 import confetti from 'canvas-confetti';
 
-import { Pokemon, PokemonListResponse } from '../../interfaces';
+import { Pokemon } from '../../interfaces';
 import { getPokemonInfo, localFavorites, typePokeToHex } from '../../utils';
 
 import styled from 'styled-components';
@@ -70,9 +69,7 @@ export const PokemonByNamePage: NextPage<Props> = ({ toggleTheme, pokemon, color
                         alignItems= {"center"}
                         justifyContent={'center'}
                     >
-                        <Grid item 
-                            // xs={12} sm={4}
-                        >
+                        <Grid item >
                             <Box sx={{ 
                                 display: 'flex', 
                                 alignItems: 'center', 
