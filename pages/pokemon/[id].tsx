@@ -97,7 +97,7 @@ export const PokemonByNamePage: NextPage<Props> = ({ toggleTheme, pokemon, color
                         >
 
                             <Card 
-                                sx={{ minWidth: 300, backgroundColor: 'secondary.main' }} 
+                                sx={{ minWidth: 300, backgroundColor: 'primary.main' }} 
                                 elevation={10}
                             >
                                 <CardContent>

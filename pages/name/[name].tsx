@@ -64,7 +64,7 @@ export const PokemonByNamePage: NextPage<Props> = ({ toggleTheme, pokemon, color
                         <Button 
                             variant="contained"
                             onClick={ onToggleFavorite }
-                            color={'primary'}
+                            color={'success'}
                             sx={{marginTop: 2}}
                         >
                             {
@@ -100,7 +100,7 @@ export const PokemonByNamePage: NextPage<Props> = ({ toggleTheme, pokemon, color
                         >
 
                             <Card 
-                                sx={{ minWidth: 300, backgroundColor: 'secondary.main' }} 
+                                sx={{ minWidth: 300, backgroundColor: 'success.main' }} 
                                 elevation={10}
                             >
                                 <CardContent>
