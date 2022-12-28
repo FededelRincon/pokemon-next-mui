@@ -113,7 +113,7 @@ export const PokemonByNamePage: NextPage<Props> = ({ toggleTheme, pokemon, color
                                     </Typography>
                                     {
                                     types.map( (type) => (
-                                        <Typography sx={{ ml: 3.5, textTransform: 'capitalize' }} style={{ display: 'list-item' }} variant="h6" color="text.secondary">{type.type.name}</Typography>
+                                        <Typography key={type.type.name} sx={{ ml: 3.5, textTransform: 'capitalize' }} style={{ display: 'list-item' }} variant="h6" color="text.secondary">{type.type.name}</Typography>
                                         ))
                                     }
 
