@@ -6,9 +6,8 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { pokeApi } from '../../api';
 import { Layout } from '../../components/layouts';
-import { useTheme } from '@mui/material/styles';
 
-// import confetti from 'canvas-confetti';
+import confetti from 'canvas-confetti';
 
 import { Pokemon, PokemonListResponse } from '../../interfaces';
 import { getPokemonInfo, localFavorites, typePokeToHex } from '../../utils';
@@ -39,17 +38,17 @@ export const PokemonByNamePage: NextPage<Props> = ({ toggleTheme, pokemon, color
         localFavorites.toggleFavorite( pokemon.id );
         setIsInFavorites( !isInFavorites);
 
-    //     if( isInFavorites ) return;
-    //     confetti({
-    //         zIndex: 999,
-    //         particleCount: 100,
-    //         spread: 160,
-    //         angle: -100,
-    //         origin: {
-    //             x: 1,
-    //             y: 0,
-    //         }
-    //     })
+        if( isInFavorites ) return;
+        confetti({
+            zIndex: 999,
+            particleCount: 200,
+            spread: 160,
+            angle: -50,
+            origin: {
+                x: 0,
+                y: 0,
+            }
+        })
 
     }
 
@@ -65,7 +64,7 @@ export const PokemonByNamePage: NextPage<Props> = ({ toggleTheme, pokemon, color
                             variant="contained"
                             onClick={ onToggleFavorite }
                             color={'success'}
-                            sx={{marginTop: 2}}
+                            sx={{marginTop: 2, borderBlockStyle: 'solid', borderColor: 'primary.main', borderBlockWidth: '2px' }}
                         >
                             {
                                 isInFavorites ? 'Delete from favorites' : 'Save in favorites'
@@ -100,7 +99,7 @@ export const PokemonByNamePage: NextPage<Props> = ({ toggleTheme, pokemon, color
                         >
 
                             <Card 
-                                sx={{ minWidth: 300, backgroundColor: 'success.main' }} 
+                                sx={{ minWidth: 300, backgroundColor: 'success.main', borderBlockStyle: 'solid', borderColor: 'primary.main', borderBlockWidth: '2px' }} 
                                 elevation={10}
                             >
                                 <CardContent>

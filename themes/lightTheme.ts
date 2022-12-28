@@ -11,7 +11,7 @@ export const lightTheme = createTheme({
         main: '#bbb',
       },
       success:{
-        main: '#145e99',
+        main: '#eee',
       }
     },
   });

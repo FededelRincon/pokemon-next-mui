@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { pokeApi } from '../../api';
 import { Layout } from '../../components/layouts';
 
-// import confetti from 'canvas-confetti';
+import confetti from 'canvas-confetti';
 
 import { Pokemon, PokemonListResponse } from '../../interfaces';
 import { getPokemonInfo, localFavorites, typePokeToHex } from '../../utils';
@@ -35,17 +35,17 @@ export const PokemonByNamePage: NextPage<Props> = ({ toggleTheme, pokemon, color
         localFavorites.toggleFavorite( pokemon.id );
         setIsInFavorites( !isInFavorites);
 
-    //     if( isInFavorites ) return;
-    //     confetti({
-    //         zIndex: 999,
-    //         particleCount: 100,
-    //         spread: 160,
-    //         angle: -100,
-    //         origin: {
-    //             x: 1,
-    //             y: 0,
-    //         }
-    //     })
+        if( isInFavorites ) return;
+        confetti({
+            zIndex: 999,
+            particleCount: 200,
+            spread: 160,
+            angle: -50,
+            origin: {
+                x: 0,
+                y: 0,
+            }
+        })
 
     }
 
