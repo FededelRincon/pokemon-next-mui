@@ -49,8 +49,6 @@ export const PokemonByNamePage: NextPage<Props> = ({ toggleTheme, pokemon, color
 
     }
 
-
-
     return (
         <>
             <GradientDiv color={`${colorTypePoke}`}>
@@ -60,7 +58,7 @@ export const PokemonByNamePage: NextPage<Props> = ({ toggleTheme, pokemon, color
                             variant="contained"
                             onClick={ onToggleFavorite }
                             color={'primary'}
-                            sx={{marginTop: 2}}
+                            sx={{marginTop: 2, borderBlockStyle: 'solid', borderColor: 'primary.main', borderBlockWidth: '2px' }}
                         >
                             {
                                 isInFavorites ? 'Delete from favorites' : 'Save in favorites'
@@ -97,7 +95,7 @@ export const PokemonByNamePage: NextPage<Props> = ({ toggleTheme, pokemon, color
                         >
 
                             <Card 
-                                sx={{ minWidth: 300, backgroundColor: 'primary.main' }} 
+                                sx={{ minWidth: 300, backgroundColor: 'success.main', borderBlockStyle: 'solid', borderColor: 'primary.main', borderBlockWidth: '2px' }} 
                                 elevation={10}
                             >
                                 <CardContent>

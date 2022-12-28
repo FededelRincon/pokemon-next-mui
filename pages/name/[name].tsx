@@ -52,9 +52,6 @@ export const PokemonByNamePage: NextPage<Props> = ({ toggleTheme, pokemon, color
 
     }
 
-
-    
-
     return (
         <>
             <GradientDiv color={`${colorTypePoke}`}>
