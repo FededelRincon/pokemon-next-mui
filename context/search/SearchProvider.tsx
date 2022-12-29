@@ -15,7 +15,13 @@ const SEARCH_INITIAL_STATE: SearchState = {
 }
 
 
-export const SearchProvider:FC = ({ children }) => {
+
+type Props = {
+    children: React.ReactNode;
+};
+
+
+export const SearchProvider:FC<Props> = ({ children }) => {
 
     const [state, dispatch] = useReducer( searchReducer, SEARCH_INITIAL_STATE );
 
