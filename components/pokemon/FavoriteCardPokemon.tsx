@@ -26,6 +26,7 @@ export const FavoriteCardPokemon: FC<Props> = ({ pokemonId }) => {
             <Card 
                 onClick={ onFavoriteClicked }
                 sx={{ backgroundColor: 'primary.main'}}
+                data-testid='data-testid-card'
             >
                 <CardActionArea>
                     <Box sx={{marginTop: 2, marginBottom: 4 }} >
